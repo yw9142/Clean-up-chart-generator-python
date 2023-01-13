@@ -65,53 +65,71 @@ def random_emoji(unicode_version=6):
 # file = open("TextFile.txt", "w");
 
 user = {
-  "강동석": False,
+  "강동석": True,
   "정재우": True,
-  "이은학": False,
-  "이승민": False,
+  "이은학": True,
+  "이승민": True,
   "김동민": True,
   "박용훈": False,
-  "민일": True,
   "김태경": True,
   "김현호": False,
+  "민일": True,
   "백재범": True,
   "우현하": True,
   "전진욱": True,
+  
   "김정운": True,
   "김정훈": True,
   "이민혁": False,
   "최영민": True,
-  "최재용": False,
+  "최재용": True,
   "허은빈": True,
+  
   "문창민": True,
-  "이주석": False,
+  "이주석": True,
   "지태우": True,
   "최진교": True,
-  "손도현": True,
-  "이승기": True,
-  "이현재": True,
-  "정지환": True,
-  "조정재": True,
+  
+  "손도현": False,
+  "안규보": False,
+  "이승기": False,
+  "이현재": False,
+  "장수원": False,
+  "정지환": False,
+  "조정재": False,
   "한재진": False,
 }
 
-area = [
-  "독사", "마대", "마대", "마대", "사이드", "휴체", "휴체", "휴체", "신세", "신세", "화장실", "화장실",
-  "화장실", "화장실"
+area_before = [
+  "사관실", "독사", "마대", "마대", "마대", "사이드", "휴체", "휴체", "휴체", "신세", "신세", "화장실",
+  "화장실", "화장실", "화장실"
+]
+
+area_after = [
+  "사관실", "독사", "마대", "마대", "마대", "사이드", "휴체", "휴체", "휴체", "신세", "신세", "화장실",
+  "화장실", "화장실", "화장실"
 ]
 
 #1 False 인원 제거
 lst = [i for i, j in user.items() if j == True]
 
 #2 청소표 인원 맞추기
-while len(lst) != len(area):
-  lst.pop(0)
+if datetime.today().day < 16:
+  while len(lst) != len(area_before):
+    lst.pop(0)
+else:
+  while len(lst) != len(area_after):
+    lst.pop(0)
 
 with open("TextFile.txt", "w") as file:
   file.write(
     f"{random_emoji(UNICODE_VERSION)} {datetime.today().year}년 {datetime.today().month}월 {datetime.today().day}일 {random_emoji(UNICODE_VERSION)}\n"
   )
-  for i in range(len(area)):
-    file.write(f"{lst[i]} - {area[i]}\n")
+  if datetime.today().day < 16:
+    for i in range(len(area_before)):
+      file.write(f"{lst[i]} - {area_before[i]}\n")
+  else:
+    for i in range(len(area_after)):
+      file.write(f"{lst[i]} - {area_after[i]}\n")
 
 file.close()
